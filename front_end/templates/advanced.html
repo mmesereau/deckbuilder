@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row advanced-header">
   <h3>Advanced Search:</h3>
 </div>
 <div class="row">
@@ -14,8 +14,7 @@
     </select>
     <label for="formats">Formats: Select to Show Only Legal Cards for This Format</label>
     <div class="col-xs-12 advanced-formats" ng-repeat="format in AC.options.format">
-      <label for="{{format}}">{{format}}</label>
-      <input type="checkbox" value="{{format}}" ng-model="AC.criteria.format[$index]">
+      <button class="advanced-toggle-button" type="button" ng-click="AC.criteria.format[$index] = !AC.criteria.format[$index]">{{format}}<span ng-show="AC.criteria.format[$index]"> (Selected)</span></button>
     </div>
     <label for="types">Card Type: Select Any</label>
     <br>
@@ -23,7 +22,6 @@
       <option ng-repeat="type in AC.options.types" value="{{type}}">{{type}}</option>
     </select>
     <br>
-
     <label for="oracle">Oracle Text:</label>
     <br>
     <input type="text" placeholder="First Strike, Vigilance, Lifelink, Deathtouch" ng-model="AC.criteria.oracle">
@@ -31,20 +29,17 @@
     <label for="colors">Colors:</label>
     <br>
     <div class="col-xs-12 advanced-formats" ng-repeat="color in AC.options.colors">
-      <label for="{{color}}">{{color}}</label>
-      <input type="checkbox" value="{{color}}" ng-model="AC.criteria.colors[$index]" ng-click="AC.colorLength()">
+      <button type="button" ng-click="AC.colorSwitch([$index])" id="color{{color}}">{{color}}</button>
     </div>
     <div class="advanced-formats" ng-show="AC.multicolor">
-      <label for="allcolors">Check to Only Show All Colors Selected</label>
-      <input type="checkbox" ng-model="AC.criteria.allcolors[0]">
+      <button type="button" ng-click="AC.criteria.allcolors[0] = !AC.criteria.allcolors[0]">Only Show All Colors Selected<span ng-show="AC.criteria.allcolors[0]"> (Selected)</span></button>
     </div>
     <br>
     <label for="rarity">Rarity</label>
     <div class="col-xs-12 advanced-formats" ng-repeat="rarity in AC.options.rarity">
-      <label for="{{rarity}}">{{rarity}}</label>
-      <input type="checkbox" value="{{rarity}}" ng-model="AC.criteria.rarity[$index]">
+      <button type="button" class="advanced-toggle-button" ng-click="AC.criteria.rarity[$index] = !AC.criteria.rarity[$index]">{{rarity}}<span ng-show="AC.criteria.rarity[$index]"> (Selected)</span></button>
     </div>
     <br>
-    <input type="submit" value="Search">
+    <input type="submit" class="advanced-submit-button" value="Search">
   </form>
 </div>

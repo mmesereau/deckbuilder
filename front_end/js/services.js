@@ -16,16 +16,6 @@ app.service("HomeService", ["$window", "$state", "$http", function($window, $sta
 
 app.service("LoginService", ["$window", "$state", "$http", function($window, $state, $http) {
   var sv = this;
-  sv.login = function(user) {
-    $http.post("http://localhost:3000/login", user)
-    .then(function(data) {
-      $window.localStorage.token = data.data.token;
-      $state.go('home');
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-  }
 }]);
 
 app.service("RegisterService", ["$window", "$state", "$http", function($window, $state, $http) {
@@ -33,6 +23,9 @@ app.service("RegisterService", ["$window", "$state", "$http", function($window, 
   sv.register = function(user) {
     $http.post("http://localhost:3000/register", user)
     .then(function(data) {
+      if (data.data === "Existing Username") {
+
+      }
       $window.localStorage.token = data.data.token;
       $state.go("home");
     })

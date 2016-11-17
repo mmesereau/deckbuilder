@@ -1,4 +1,6 @@
 <form class="login-form" ng-submit="LC.login()">
+  <p class="login-form-invalid" ng-show="LC.badUsername">This User Name does not exist.</p>
+  <p class="login-form-invalid" ng-show="LC.badPassword">You have entered an incorrect password.</p>
   <label for="username">User Name or Email Address:</label>
   <br>
   <input type="text" placeholder="MasterMage" ng-model="LC.user.username">

@@ -92,6 +92,17 @@ form input {
   cursor: url('./cursor2.png') 2000 0, auto;
 }
 
+form button {
+  font: 3vh "MTG";
+  margin: 1.5%;
+  width: 50%;
+  background-color: transparent;
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  cursor: url('./cursor2.png') 2000 0, auto;
+}
+
 form select {
   font: 3vh "MTG";
   margin: 1.5%;
@@ -116,6 +127,11 @@ form select {
 
 .register-form-invalid {
   font: 2vh "MTG";
+  color: white;
+}
+
+.login-form-invalid {
+  font: 3vh "MTG";
   color: white;
 }
 
@@ -145,4 +161,39 @@ form select {
 
 .advanced-formats input {
   height: inherit;
+}
+
+.advanced-header {
+  text-align: center;
+  margin: 3%;
+}
+
+.new-deck-header {
+  text-align: center;
+  margin: 3%;
+}
+
+.advanced-submit-button {
+  margin: 5%;
+  background-color: black;
+}
+
+.deck-description-box {
+  background-color: transparent;
+  font: 3vh "MTG";
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border: none;
+}
+
+.new-deck-form {
+  text-align: center;
+}
+
+.new-deck-form label {
+  font: 4vh "MTG";
+  margin: 1%;
+}
+
+.new-deck-form input {
+  margin: 1%;
 }

@@ -34,6 +34,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: '../templates/advanced.html',
     controller: 'AdvancedController',
     controllerAs: 'AC'
+  })
+  .state('new', {
+    url: '/new',
+    templateUrl: '../templates/adddeck.html',
+    controller: 'NewDeckController',
+    controllerAs: 'NC'
   });
 });
 

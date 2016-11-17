@@ -31,6 +31,49 @@ app.controller("RegisterController", ["RegisterService", "$state", "$rootScope",
     $state.go("home");
   }
   vm.user = {};
+  vm.usernameCheck = function() {
+    $http.post("http://localhost:3000/register/username", vm.user)
+    .then(function(data) {
+      if (data.data === "Username Taken") {
+        vm.takenUsername = true;
+      }
+      else {
+        vm.takenUsername = false;
+      }
+    })
+  }
+  vm.emailCheck = function() {
+    if (vm.user.email) {
+      if (vm.user.email.indexOf('@') === -1 || vm.user.email.indexOf('.') === -1 || vm.user.email.indexOf('.') < vm.user.email.indexOf('@')) {
+        vm.invalidEmail = true;
+        $http.post("http://localhost:3000/register/email", vm.user)
+        .then(function(data) {
+          if (data.data === "Email Taken") {
+            vm.takenEmail = true;
+          }
+          else {
+            vm.takenEmail = false;
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+      }
+      else {
+        vm.invalidEmail = false;
+      }
+    }
+  }
+  vm.passwordCheck = function() {
+    if (vm.user.password) {
+      if (vm.user.password.length < 8 || vm.user.password.length > 12) {
+        vm.invalidPassword = true;
+      }
+      else {
+        vm.invalidPassword = false;
+      }
+    }
+  }
   vm.register = function() {
     RegisterService.register(vm.user);
   }
@@ -43,7 +86,30 @@ app.controller("LoginController", ["LoginService", "$state", "$rootScope", "$win
   }
   vm.user = {};
   vm.login = function() {
-    LoginService.login(vm.user);
+    $http.post("http://localhost:3000/login", vm.user)
+    .then(function(data) {
+      if (data.data === "Incorrect Password") {
+        vm.badPassword = true;
+        vm.badUsername = false;
+        vm.user.password = "";
+      }
+      else if (data.data === "Nonexistent Username") {
+        vm.badUsername = true;
+        vm.badPassword = false;
+        vm.user.username = "";
+        vm.user.password = "";
+      }
+      else if (data.data.token) {
+        $window.localStorage.token = data.data.token;
+        $state.go('home');
+      }
+      else {
+        alert("Something has gone terribly wrong!");
+      }
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
   }
 }]);
 
@@ -103,6 +169,16 @@ app.controller("AdvancedController", ["AdvancedService", "$state", "$rootScope",
     AdvancedService.search(vm.criteria, vm.options);
     console.log(vm.criteria);
   };
+  vm.colorSwitch = function(index) {
+    vm.criteria.colors[index] = !vm.criteria.colors[index];
+    if (vm.criteria.colors[index]) {
+      $("#color" + vm.options.colors[index]).css("background-color", vm.options.colors[index]);
+    }
+    else {
+      $("#color" + vm.options.colors[index]).css("background-color", "transparent");
+    }
+    vm.colorLength();
+  }
   vm.colorLength = function() {
     var selected = 0;
     for (var i = 0; i < vm.criteria.colors.length; i++){
@@ -117,4 +193,22 @@ app.controller("AdvancedController", ["AdvancedService", "$state", "$rootScope",
       vm.multicolor = false;
     }
   }
+}]);
+
+app.controller("NewDeckController", ["$state", "$http", "$rootScope", "$window", function($state, $http, $rootScope, $window) {
+  var vm = this;
+  if (!$window.localStorage.token) {
+    $state.go('home');
+  }
+  vm.deck = {};
+  vm.add = function() {
+    $http.post("http://localhost:3000/deck", {deck: vm.deck, user: vm.user})
+    .then(function(data) {
+      $window.localStorage.deck = data[0];
+      $state.go('update');
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+  };
 }]);

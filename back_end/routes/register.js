@@ -8,17 +8,14 @@ var db = require('monk')(process.env.MONGODB_URI || 'localhost/mastermage');
 var users = db.get('users');
 
 router.post('/', function(req, res) {
-  console.log(req.body);
   hash(req.body.password)
   .then(function(result) {
-    console.log("hashed");
     return users.insert({
       username: req.body.username,
       email: req.body.email,
       password: result
     })
     .then(function(data) {
-      console.log("inserted into database");
       var profile = {
         id: data._id,
         username: data.username,
@@ -28,7 +25,6 @@ router.post('/', function(req, res) {
       res.status(200).json({
         token: token
       });
-      res.send(data);
     })
     .catch(function(err) {
       console.log(err);
@@ -36,6 +32,38 @@ router.post('/', function(req, res) {
     })
   })
 })
+
+router.post('/email', function(req, res) {
+  users.find({email: req.body.email})
+  .then(function(data) {
+    if (data[0]) {
+      res.send("Email Taken");
+    }
+    else {
+      res.send("Clear");
+    }
+  })
+  .catch(function(err) {
+    res.send('failure!');
+    console.log(err);
+  });
+});
+
+router.post('/username', function(req, res) {
+  users.find({username: req.body.username})
+  .then(function(data) {
+    if (data[0]) {
+      res.send("Username Taken");
+    }
+    else {
+      res.send("Clear");
+    }
+  })
+  .catch(function(err) {
+    res.send('failure!');
+    console.log(err);
+  });
+});
 
 
 module.exports = router;
