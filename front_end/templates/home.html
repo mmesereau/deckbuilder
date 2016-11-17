@@ -1,0 +1,13 @@
+<div ng-show="HC.loggedIn" class="col-xs-12 login-div">
+  <div class="logout col-xs-12">
+    <h4 class="home-button" ng-click="HC.logout()">Log Out</h4>
+  </div>
+</div>
+<div ng-hide="HC.loggedIn" class="col-xs-12 login-div">
+  <div class="login col-xs-12 col-md-6">
+    <h4 class="login-button home-button" ui-sref="login">Log In</h4>
+  </div>
+  <div class="register col-xs-12 col-md-6">
+    <h4 class="register-button home-button" ui-sref="register">Register</h4>
+  </div>
+</div>

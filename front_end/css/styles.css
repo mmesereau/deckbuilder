@@ -1,0 +1,148 @@
+body {
+  background: url('mtg_background_hydra.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  cursor: url('./cursor2.png') 2000 0, auto;
+}
+
+@font-face {
+  font-family: "MTG";
+  src: url("MAGIC.TTF")
+}
+
+h1 {
+  font: 7vh "MTG";
+  width: 100%;
+  color: #F74600;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+h3 {
+  font: 4vh "MTG";
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.header {
+  text-align: center;
+  height: 20vh;
+}
+
+/*div {
+  border: 1px solid white;
+}*/
+
+.body-div {
+  height: 80vh;
+}
+
+.login-div {
+  height: 100%;
+  text-align: center;
+}
+
+.home-button {
+  font: 4vh "MTG";
+  color: #982B00;
+}
+
+.home-button:hover {
+  color: red;
+  font-size: 7vh;
+}
+
+form {
+  text-align: center;
+}
+
+.login-form label {
+  font: 10vh "MTG";
+}
+
+.register-form label {
+  font: 6vh "MTG";
+}
+
+.advanced-form label {
+  font: 7vh "MTG";
+}
+
+form label {
+  margin-top: 2%;
+  color: #F74600;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.login-form input {
+  height: 7vh;
+}
+
+.register-form input {
+  height: 4vh;
+}
+
+form input {
+  font: 3vh "MTG";
+  margin: 1.5%;
+  width: 50%;
+  background-color: transparent;
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  cursor: url('./cursor2.png') 2000 0, auto;
+}
+
+form select {
+  font: 3vh "MTG";
+  margin: 1.5%;
+  width: 50%;
+  background-color: transparent;
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  cursor: url('./cursor2.png') 2000 0, auto;
+}
+
+.cardform input {
+  width: auto;
+  margin: 0%;
+}
+
+.submit:hover {
+  height: 9vh;
+  font: 4vh "MTG";
+  color: red;
+}
+
+.register-form-invalid {
+  font: 2vh "MTG";
+  color: white;
+}
+
+.search {
+  text-align: center;
+}
+
+.search h4 {
+  font: 3vh "MTG";
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.search p {
+  font: 2vh "MTG";
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.advanced-search:hover {
+  color: red;
+}
+
+.advanced-formats label {
+  font: 3vh "MTG";
+}
+
+.advanced-formats input {
+  height: inherit;
+}

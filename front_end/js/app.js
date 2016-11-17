@@ -1,15 +1,42 @@
 'use strict';
 
-var app = angular.module("MTGApp", [])
-.controller("TestController", ["$http", function($http) {
-  var vm = this;
-  vm.api = "https://api.deckbrew.com/mtg/cards"
-  $http.get(vm.api + "?name=black%20lotus")
-  .then(function(data) {
-    vm.cards = data.data;
-    console.log(vm.cards);
+var app = angular.module("MTGApp", ['ui.router']);
+
+app.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
+  $stateProvider
+  .state('home', {
+    url: '/',
+    templateUrl: '../templates/home.html',
+    controller: 'HomeController',
+    controllerAs: 'HC'
   })
-  .catch(function(err) {
-    console.log(err);
+  .state('login', {
+    url: '/login',
+    templateUrl: '../templates/login.html',
+    controller: 'LoginController',
+    controllerAs: 'LC'
+  })
+  .state('register', {
+    url: '/register',
+    templateUrl: '../templates/register.html',
+    controller: 'RegisterController',
+    controllerAs: 'RC'
+  })
+  .state('search', {
+    url: '/search',
+    templateUrl: '../templates/search.html',
+    controller: 'SearchController',
+    controllerAs: 'SC'
+  })
+  .state('advanced', {
+    url: '/advanced',
+    templateUrl: '../templates/advanced.html',
+    controller: 'AdvancedController',
+    controllerAs: 'AC'
   });
-}]);
+});
+
+// app.config(['$httpProvider', function($httpProvider) {
+//   $httpProvider.interceptors.push('authInterceptor');
+// }]);
