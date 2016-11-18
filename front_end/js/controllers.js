@@ -3,14 +3,35 @@
 app.controller("HomeController", ["HomeService", "$state", "$rootScope", "$window", "$http", function(HomeService, $state, $rootScope, $window, $http) {
   var vm = this;
   vm.$state = $state;
+
+  vm.getDecks = function() {
+    $http.post("http://localhost:3000/deck/find", $rootScope.profile)
+    .then(function(data) {
+      vm.decks = data.data;
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+  };
+
+
   if ($window.localStorage.token) {
     vm.loggedIn = true;
     $rootScope.profile = HomeService.getProfile();
+    vm.getDecks();
   }
+
   vm.logout = function() {
     delete $window.localStorage.token;
     vm.loggedIn = false;
   };
+
+  vm.edit = function(index) {
+    $rootScope.deck = vm.decks[index].deck;
+    $state.go('update');
+  };
+
+
   vm.search = function() {
     var api = "https://api.deckbrew.com/mtg/cards"
     vm.card.replace(" ", "%20");
@@ -202,13 +223,36 @@ app.controller("NewDeckController", ["$state", "$http", "$rootScope", "$window",
   }
   vm.deck = {};
   vm.add = function() {
-    $http.post("http://localhost:3000/deck", {deck: vm.deck, user: vm.user})
+    $http.post("http://localhost:3000/deck", {deck: vm.deck, user: $rootScope.profile})
     .then(function(data) {
-      $window.localStorage.deck = data[0];
+      console.log(data);
+      $rootScope.deck = data.data;
       $state.go('update');
     })
     .catch(function(err) {
       console.log(err);
     });
   };
+}]);
+
+app.controller("UpdateDeckController", ["$state", "$http", "$rootScope", "$window", function($state, $http, $rootScope, $window) {
+  var vm = this;
+  if (!$window.localStorage.token || !$rootScope.deck) {
+    $state.go('home');
+  }
+  vm.deck = $rootScope.deck;
+  vm.search = function() {
+    var api = "https://api.deckbrew.com/mtg/cards"
+    vm.searchCriteria.replace(" ", "%20");
+    $http.get(api + "?name=" + vm.searchCriteria)
+    .then(function(data) {
+      vm.searchResult = data.data[0];
+      console.log(data.data[0]);
+      return;
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+  };
+  //TODO: vm.add-to-staging-area()
 }]);

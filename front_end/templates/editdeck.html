@@ -1,0 +1,23 @@
+<div class="row page-header">
+  <h3>Edit Deck: {{UC.deck.name}}</h3>
+</div>
+<div class="row search">
+  <p>
+    {{UC.deck.description}}
+  </p>
+</div>
+<div class="row search">
+  <input type="text" ng-keyup="UC.search()" placeholder="Add a Card..." ng-model="UC.searchCriteria">
+  <h3 ng-show="UC.searchResult && UC.searchResult.name !== '_____'" class="advanced-search" ng-click="UC.add-to-staging-area()">{{UC.searchResult.name}}</h3>
+</div>
+<div class="row cards-in-deck">
+  <div class="col-xs-12 col-md-4">
+    <h3>Included</h3>
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <h3>Staging Area</h3>
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <h3>Stats</h3>
+  </div>
+</div>

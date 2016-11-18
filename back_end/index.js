@@ -11,6 +11,7 @@ var bcrypt = require('bcrypt');
 
 var register = require('./routes/register.js');
 var login = require('./routes/login.js');
+var deck = require('./routes/deck.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/register', register);
 app.use('/login', login);
+app.use('/deck', deck);
 
 
 app.use(function(req, res, next) {

@@ -40,6 +40,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: '../templates/adddeck.html',
     controller: 'NewDeckController',
     controllerAs: 'NC'
+  })
+  .state('update', {
+    url: '/update_deck',
+    templateUrl: '../templates/editdeck.html',
+    controller: 'UpdateDeckController',
+    controllerAs: 'UC'
   });
 });
 

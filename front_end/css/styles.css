@@ -81,7 +81,7 @@ form label {
   height: 4vh;
 }
 
-form input {
+input {
   font: 3vh "MTG";
   margin: 1.5%;
   width: 50%;
@@ -151,6 +151,15 @@ form select {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+.edit-deck-button {
+  height: 100%;
+  background-color: transparent;
+  font: 3vh "MTG";
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border: none;
+}
+
 .advanced-search:hover {
   color: red;
 }
@@ -163,15 +172,11 @@ form select {
   height: inherit;
 }
 
-.advanced-header {
+.page-header {
   text-align: center;
   margin: 3%;
 }
 
-.new-deck-header {
-  text-align: center;
-  margin: 3%;
-}
 
 .advanced-submit-button {
   margin: 5%;
@@ -196,4 +201,20 @@ form select {
 
 .new-deck-form input {
   margin: 1%;
+}
+
+.home-page-deck h5 {
+  font: 3vh "MTG";
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.home-page-deck h6 {
+  font: 2vh "MTG";
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.cards-in-deck div {
+  text-align: center;
 }
